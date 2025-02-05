@@ -1,7 +1,7 @@
 import os
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app, send_from_directory
 from werkzeug.utils import secure_filename
 from app.main import allowed_file, classify_image
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app, send_from_directory
 
 bp = Blueprint('routes', __name__)
 
@@ -13,7 +13,7 @@ def home():
 def uploaded_file(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
 
-@bp.route('/upload', methods=['POST'])
+@bp.route('/result', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
         flash('No file part')
@@ -26,12 +26,13 @@ def upload_file():
 
     if file and allowed_file(file.filename, current_app.config['ALLOWED_EXTENSIONS']):
         filename = secure_filename(file.filename)
+    
         file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
         os.makedirs(current_app.config['UPLOAD_FOLDER'], exist_ok=True)
         file.save(file_path)
 
-        prediction = classify_image(file_path)
-        return render_template('results.html', input_image=filename, prediction=prediction, condition='Freshhh')
+        fruit, condition = classify_image(file_path)
+        return render_template('result.html', input_image=filename, fruit=fruit, condition=condition)
     else:
         flash('Only image files are allowed (png, jpg, jpeg).')
         return redirect(url_for('routes.home'))

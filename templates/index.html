@@ -12,17 +12,30 @@
     
     <main>
         <div class="upload-box">
-            <h2>Classify the Fruit!</h2>
-            
-            <form action="/upload" method="POST" enctype="multipart/form-data">
-                <input type="file" id="fileInput" name="file" accept="image/*" onchange="validateFile()">
-                <label for="fileInput">Drop the image file here or Click to upload</label>
-                <p>DISCLAIMER: This system can only classify fruits such as apple, banana, etc.</p>
-                <button type="submit">Submit</button>
+            <form action="/result" method="POST" enctype="multipart/form-data">
+                <div class="upload-section">
+                    <input type="file" id="fileInput" name="file" accept="image/*" hidden>
+                    
+                    <label for="fileInput" id="dropZone">
+                        <div>
+                            <h2>Classify the Fruit!</h2>
+                            
+                            <p>Drop image here or click to upload</p>
+                        </div>
+                    </label>
+                </div>
             </form>
+            
+            <div class="disclaimer-box">
+                <p>DISCLAIMER: This system can only classify fruits such as apple, banana, orange, grape, guava, jujube, pomegranate, and strawberry.</p>
+            </div>
         </div>
     </main>
-    
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

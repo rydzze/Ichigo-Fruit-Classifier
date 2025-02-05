@@ -1,8 +1,8 @@
 import os
+import numpy as np
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.applications.resnet50 import preprocess_input
-import numpy as np
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 model = load_model('app/model.h5', custom_objects={'preprocess_input': preprocess_input})
@@ -23,4 +23,11 @@ def classify_image(image_path):
               'RottenApple', 'RottenBanana', 'RottenGrape', 'RottenGuava', 'RottenJujube', 'RottenOrange', 'RottenPomegranate', 'RottenStrawberry']
     fruit = labels[class_idx]
     
-    return fruit
+    if "Fresh" in fruit:
+        fruit = fruit.replace("Fresh", "")
+        condition = "Fresh"
+    else:
+        fruit = fruit.replace("Rotten", "")
+        condition = "Rotten"
+
+    return fruit, condition
