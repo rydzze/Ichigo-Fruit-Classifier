@@ -1,6 +1,37 @@
-from flask import render_template
-from app import app
+import os
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app, send_from_directory
+from werkzeug.utils import secure_filename
+from app.main import allowed_file, classify_image
 
-@app.route('/')
+bp = Blueprint('routes', __name__)
+
+@bp.route('/')
 def home():
-    return render_template('index.php')
+    return render_template('index.html')
+
+@bp.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)
+
+@bp.route('/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+
+    file = request.files['file']
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+
+    if file and allowed_file(file.filename, current_app.config['ALLOWED_EXTENSIONS']):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+        os.makedirs(current_app.config['UPLOAD_FOLDER'], exist_ok=True)
+        file.save(file_path)
+
+        prediction = classify_image(file_path)
+        return render_template('results.html', input_image=filename, prediction=prediction, condition='Freshhh')
+    else:
+        flash('Only image files are allowed (png, jpg, jpeg).')
+        return redirect(url_for('routes.home'))

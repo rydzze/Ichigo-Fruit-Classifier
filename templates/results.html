@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ichigo | Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>ICHIGO</header>
+
+    <main>
+        <div class="results">
+            <div class="input">
+                <h3>Input Image</h3>
+                <img src="{{ url_for('routes.uploaded_file', filename=input_image) }}" alt="Uploaded Image">
+            </div>
+
+            <div class="output">
+                <h3>Output</h3>
+                <p><strong>Fruit:</strong> {{ prediction }}</p>
+                <p><strong>Condition:</strong> {{ condition }}</p>
+                <a href="/" class="button">Return</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
