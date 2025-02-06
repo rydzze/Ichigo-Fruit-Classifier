@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ichigo | Result</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/ichigo.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
@@ -19,12 +20,12 @@
             </div>
 
             <div class="white-box output-box">
-                <h3>Output</h3>
+                <h3 style="padding-bottom: 3rem;">Prediction Result</h3>
 
                 <p><strong>Fruit:</strong> {{ fruit }}</p>
                 <p><strong>Condition:</strong> {{ condition }}</p>
                 
-                <a href="/" class="button">Return</a>
+                <a href="/" class="button" style="margin-top: 3rem;">Return</a>
             </div>
         </div>
     </main>

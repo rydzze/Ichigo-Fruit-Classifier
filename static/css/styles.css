@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffe9e9;
@@ -5,6 +6,7 @@ body {
     padding: 0;
 }
 
+/* Header Styles */
 header {
     background-color: white;
     color: #ff7070;
@@ -15,6 +17,7 @@ header {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* Main Content Styles */
 main {
     display: flex;
     justify-content: center;
@@ -28,13 +31,17 @@ main {
     width: 70%;
 }
 
-.white-box {
+/* Shared Box Styles */
+.white-box, .upload-box {
     background: white;
     border-radius: 10px;
     padding: 2rem;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
     text-align: center;
+}
+
+.white-box {
+    width: 100%;
 }
 
 .input-box, .output-box {
@@ -47,7 +54,8 @@ main {
     border-radius: 8px;
 }
 
-.button {
+/* Button Styles */
+.button, button {
     display: inline-block;
     background-color: #ff7070;
     color: white;
@@ -55,15 +63,13 @@ main {
     border-radius: 5px;
     text-decoration: none;
     margin-top: 1rem;
+    border: none;
+    cursor: pointer;
 }
 
+/* Upload Box Styles */
 .upload-box {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    text-align: center;
     width: 50%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .upload-box input[type="file"] {
@@ -92,6 +98,11 @@ main {
     background-color: #fff0f0;
 }
 
+.dragover {
+    background-color: #ffcccc !important;
+}
+
+/* Disclaimer Box Styles */
 .disclaimer-box {
     background-color: #fff5f5;
     padding: 1rem;
@@ -105,15 +116,7 @@ main {
     margin: 0;
 }
 
-button {
-    background-color: #ff7070;
-    color: white;
-    border: none;
-    padding: 0.5rem 2rem;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
+/* Loading Overlay Styles */
 .loading-overlay {
     position: fixed;
     top: 0;
@@ -139,8 +142,4 @@ button {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-.dragover {
-    background-color: #ffcccc !important;
 }
