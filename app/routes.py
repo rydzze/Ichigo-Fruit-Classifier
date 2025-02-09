@@ -31,7 +31,11 @@ def upload_file():
         os.makedirs(current_app.config['UPLOAD_FOLDER'], exist_ok=True)
         file.save(file_path)
 
-        fruit, condition = classify_image(file_path)
+        fruit, condition, is_fruit = classify_image(file_path)
+
+        if is_fruit == 0:
+            return render_template('result.html', input_image=filename, fruit=fruit, condition=condition, count='-')
+        
         img_with_box, count = process_image(file_path)
         return render_template('result.html', input_image=img_with_box, fruit=fruit, condition=condition, count=count)
     else:

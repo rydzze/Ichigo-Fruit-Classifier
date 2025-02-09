@@ -20,6 +20,11 @@ def classify_image(image_path):
     img_array = np.expand_dims(img_array, axis=0)
 
     preds = model.predict(img_array)
+    probas = preds[0]
+
+    max_proba = np.max(probas)
+    if max_proba < 0.5:
+        return 'Unknown', 'Unknown', 0
     class_idx = np.argmax(preds[0])
     
     labels = ['FreshApple', 'FreshBanana', 'FreshGrape', 'FreshGuava', 'FreshJujube', 'FreshOrange', 'FreshPomegranate', 'FreshStrawberry',
@@ -33,7 +38,7 @@ def classify_image(image_path):
         fruit = fruit.replace("Rotten", "")
         condition = "Rotten"
 
-    return fruit, condition
+    return fruit, condition, 1
 
 def enhance_image(image):
     img = Image.fromarray(image)
