@@ -14,7 +14,7 @@
     <main>
         <div class="results-container">
             <div class="white-box input-box">
-                <h3>Input Image</h3>
+                <h3>Image</h3>
                 
                 <img src="{{ url_for('routes.uploaded_file', filename=input_image) }}" alt="Uploaded Image">
             </div>
@@ -23,7 +23,8 @@
                 <h3 style="padding-bottom: 3rem;">Prediction Result</h3>
 
                 <p><strong>Fruit:</strong> {{ fruit }}</p>
-                <p><strong>Condition:</strong> {{ condition }}</p>
+                <p><strong>Condition:</strong> {{ condition }}</p><br>
+                <p><strong>Total Number of Fruit:</strong> {{ count }}</p>
                 
                 <a href="/" class="button" style="margin-top: 3rem;">Return</a>
             </div>
